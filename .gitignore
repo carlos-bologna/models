@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # Glaucoma Custom Part
 research/deeplab/datasets/BinRushed/
 research/deeplab/datasets/BinRushedcorrected/
@@ -10,7 +8,6 @@ research/deeplab/datasets/init_models/
 research/deeplab/datasets/JPEGImages/
 research/deeplab/datasets/tfrecord/
 
->>>>>>> bbb536e2... 	modified:   .gitignore 'add more files at gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
