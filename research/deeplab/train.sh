@@ -33,11 +33,11 @@ cd ..
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
-STEP_1=0 #preprocess
+STEP_1=1 #preprocess
 STEP_2=0 #convert images with build_voc2012_data
 STEP_3=0 # download pre-treined model from internet
 STEP_4=0 # train
-STEP_5=1 # val
+STEP_5=0 # val
 STEP_6=0 # viz
 STEP_7=0 # export model
 
@@ -52,6 +52,10 @@ MESSIDOR_EXT="MESSIDOR_EXT"
 
 if [ ${STEP_1} -eq 1 ]
 then
+  rm -r "${WORK_DIR}/${DATASET_DIR}/JPEGImages"
+  rm -r "${WORK_DIR}/${DATASET_DIR}/SegmentationClass"
+  rm -r "${WORK_DIR}/${DATASET_DIR}/Splits"
+
   python "${WORK_DIR}"/preprocess.py \
     --fullpath_origin="${WORK_DIR}/${DATASET_DIR}/${MESSIDOR_FOLDER}" \
     --fullpath_JPEGDestination="${WORK_DIR}/${DATASET_DIR}/JPEGImages" \
