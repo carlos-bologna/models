@@ -52,9 +52,6 @@ MESSIDOR_EXT="MESSIDOR_EXT"
 
 if [ ${STEP_1} -eq 1 ]
 then
-  rm -r "${WORK_DIR}/${DATASET_DIR}/JPEGImages"
-  rm -r "${WORK_DIR}/${DATASET_DIR}/SegmentationClass"
-  rm -r "${WORK_DIR}/${DATASET_DIR}/Splits"
 
   python "${WORK_DIR}"/preprocess.py \
     --fullpath_origin="${WORK_DIR}/${DATASET_DIR}/${MESSIDOR_FOLDER}" \
