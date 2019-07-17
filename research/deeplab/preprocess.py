@@ -41,15 +41,15 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if not os.path.exists(args.fullpath_destination):
-        shutil.rmtree(args.fullpath_destination, ignore_errors=False, onerror=None)
+        shutil.rmtree(args.fullpath_destination, ignore_errors=True, onerror=None)
         os.makedirs(args.fullpath_destination)
 
     if not os.path.exists(args.fullpath_JPEGDestination):
-        shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=False, onerror=None)
+        shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=True, onerror=None)
         os.makedirs(args.fullpath_JPEGDestination)
 
     if not os.path.exists(args.fullpath_train_val_list):
-        shutil.rmtree(args.fullpath_train_val_list, ignore_errors=False, onerror=None)
+        shutil.rmtree(args.fullpath_train_val_list, ignore_errors=True, onerror=None)
         os.makedirs(args.fullpath_train_val_list)
 
     files = [f for f in glob.glob(f'{args.fullpath_origin}/*prime.tif', recursive=True)]

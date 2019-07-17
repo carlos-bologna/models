@@ -5,10 +5,10 @@ research/deeplab/datasets/Magrabia/
 research/deeplab/datasets/MESSIDOR/
 research/deeplab/datasets/MESSIDOR_EXT/
 research/deeplab/datasets/init_models/
-research/deeplab/datasets/JPEGImages/
+# research/deeplab/datasets/JPEGImages/
 research/deeplab/datasets/tfrecord/
-research/deeplab/datasets/SegmentationClass/
-research/deeplab/datasets/Splits/
+# research/deeplab/datasets/SegmentationClass/
+# research/deeplab/datasets/Splits/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -94,8 +94,9 @@ cd "${INIT_FOLDER}"
 if [ ${STEP_3} -eq 1 ]
 then
   wget -nd -c "${TF_INIT_ROOT}/${TF_INIT_CKPT}"
+  tar -xf "${TF_INIT_CKPT}"
 fi
-tar -xf "${TF_INIT_CKPT}"
+
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
