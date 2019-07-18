@@ -33,10 +33,10 @@ cd ..
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
-STEP_1=0 #preprocess
-STEP_2=1 #convert images with build_voc2012_data
-STEP_3=1 # download pre-treined model from internet
-STEP_4=1 # train
+STEP_1=1 #preprocess
+STEP_2=0 #convert images with build_voc2012_data
+STEP_3=0 # download pre-treined model from internet
+STEP_4=0 # train
 STEP_5=0 # val
 STEP_6=0 # viz
 STEP_7=0 # export model
@@ -60,11 +60,15 @@ then
     --fullpath_train_val_list="${WORK_DIR}/${DATASET_DIR}/Splits"
 
   # Remove the colormap in the ground truth annotations.
-  SEG_FOLDER="${PASCAL_ROOT}/SegmentationClass"
-  SEMANTIC_SEG_FOLDER="${PASCAL_ROOT}/SegmentationClassRaw"
+  SEG_FOLDER="${WORK_DIR}/${DATASET_DIR}/SegmentationClass"
+  SEMANTIC_SEG_FOLDER="${WORK_DIR}/${DATASET_DIR}/SegmentationClassRaw"
+
+  if [ -d "$SEMANTIC_SEG_FOLDER" ]; then
+    rm -r "${SEMANTIC_SEG_FOLDER}"
+  fi
 
   echo "Removing the color map in ground truth annotations..."
-  python "${WORK_DIR}"/remove_gt_colormap.py \
+  python "${WORK_DIR}"/datasets/remove_gt_colormap.py \
     --original_gt_folder="${SEG_FOLDER}" \
     --output_dir="${SEMANTIC_SEG_FOLDER}"
 

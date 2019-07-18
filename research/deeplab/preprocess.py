@@ -40,17 +40,14 @@ def save_train_val_list(files_list):
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    if not os.path.exists(args.fullpath_destination):
-        shutil.rmtree(args.fullpath_destination, ignore_errors=True, onerror=None)
-        os.makedirs(args.fullpath_destination)
+    shutil.rmtree(args.fullpath_destination, ignore_errors=False, onerror=None)
+    os.makedirs(args.fullpath_destination)
 
-    if not os.path.exists(args.fullpath_JPEGDestination):
-        shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=True, onerror=None)
-        os.makedirs(args.fullpath_JPEGDestination)
+    shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=False, onerror=None)
+    os.makedirs(args.fullpath_JPEGDestination)
 
-    if not os.path.exists(args.fullpath_train_val_list):
-        shutil.rmtree(args.fullpath_train_val_list, ignore_errors=True, onerror=None)
-        os.makedirs(args.fullpath_train_val_list)
+    shutil.rmtree(args.fullpath_train_val_list, ignore_errors=False, onerror=None)
+    os.makedirs(args.fullpath_train_val_list)
 
     files = [f for f in glob.glob(f'{args.fullpath_origin}/*prime.tif', recursive=True)]
 
@@ -76,15 +73,16 @@ if __name__ == '__main__':
 
         cup_mask = morphology.remove_small_holes(img_mask, np.sum(disk_mask) * 0.45)
         cup_mask = morphology.remove_small_objects(cup_mask, np.sum(disk_mask) * 0.1)
-        cup = cup_mask * 50.2
+        cup = cup_mask * 50
 
         rim_mask = disk_mask ^ cup_mask #Disk less Cup using XOR operator
-        rim = rim_mask * 50.2
+        rim = rim_mask * 100
 
         eye_mask = np.invert(bg_mask) ^ disk_mask #Eye less Disk using XOR operator
-        eye = eye_mask * 50.2
+        eye = eye_mask * 150
 
-        img_segmentation = np.stack((eye, rim, cup), axis=2)
+        #img_segmentation = np.stack((eye, rim, cup), axis=2)
+        img_segmentation = (eye + rim + cup)
 
         ori_filename = target_filename.split('/')[-1].replace('tif', 'jpg')
         seg_filename = target_filename.split('/')[-1].replace('tif', 'png')
