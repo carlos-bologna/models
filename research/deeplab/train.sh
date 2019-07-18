@@ -33,10 +33,10 @@ cd ..
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
-STEP_1=1 #preprocess
-STEP_2=0 #convert images with build_voc2012_data
-STEP_3=0 # download pre-treined model from internet
-STEP_4=0 # train
+STEP_1=0 #preprocess
+STEP_2=1 #convert images with build_voc2012_data
+STEP_3=1 # download pre-treined model from internet
+STEP_4=1 # train
 STEP_5=0 # val
 STEP_6=0 # viz
 STEP_7=0 # export model
@@ -58,6 +58,16 @@ then
     --fullpath_JPEGDestination="${WORK_DIR}/${DATASET_DIR}/JPEGImages" \
     --fullpath_destination="${WORK_DIR}/${DATASET_DIR}/SegmentationClass" \
     --fullpath_train_val_list="${WORK_DIR}/${DATASET_DIR}/Splits"
+
+  # Remove the colormap in the ground truth annotations.
+  SEG_FOLDER="${PASCAL_ROOT}/SegmentationClass"
+  SEMANTIC_SEG_FOLDER="${PASCAL_ROOT}/SegmentationClassRaw"
+
+  echo "Removing the color map in ground truth annotations..."
+  python "${WORK_DIR}"/remove_gt_colormap.py \
+    --original_gt_folder="${SEG_FOLDER}" \
+    --output_dir="${SEMANTIC_SEG_FOLDER}"
+
 fi
 
 # Convert Images
@@ -68,7 +78,7 @@ if [ ${STEP_2} -eq 1 ]
 then
   python "${WORK_DIR}"/datasets/build_voc2012_data.py \
     --image_folder="${WORK_DIR}/${DATASET_DIR}/JPEGImages" \
-    --semantic_segmentation_folder="${WORK_DIR}/${DATASET_DIR}/SegmentationClass" \
+    --semantic_segmentation_folder="${WORK_DIR}/${DATASET_DIR}/SegmentationClassRaw" \
     --list_folder="${WORK_DIR}/${DATASET_DIR}/Splits" \
     --image_format="jpg" \
     --output_dir="${MESSIDOR_DATASET}"
