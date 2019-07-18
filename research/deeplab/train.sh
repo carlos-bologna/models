@@ -106,7 +106,8 @@ if [ ${STEP_4} -eq 1 ]
 then
   python "${WORK_DIR}"/train.py \
     --logtostderr \
-    --train_split="trainval" \
+    --train_split="train" \
+    --dataset="messidor" \
     --model_variant="xception_65" \
     --atrous_rates=6 \
     --atrous_rates=12 \
@@ -132,6 +133,7 @@ then
   python "${WORK_DIR}"/eval.py \
     --logtostderr \
     --eval_split="val" \
+    --dataset="messidor" \
     --model_variant="xception_65" \
     --atrous_rates=6 \
     --atrous_rates=12 \
@@ -153,6 +155,7 @@ then
   python "${WORK_DIR}"/vis.py \
     --logtostderr \
     --vis_split="val" \
+    --dataset="messidor" \
     --model_variant="xception_65" \
     --atrous_rates=6 \
     --atrous_rates=12 \
