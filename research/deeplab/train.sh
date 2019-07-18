@@ -33,13 +33,13 @@ cd ..
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
-STEP_1=1 #preprocess
-STEP_2=0 #convert images with build_voc2012_data
+STEP_1=0 #preprocess
+STEP_2=1 #convert images with build_voc2012_data
 STEP_3=0 # download pre-treined model from internet
-STEP_4=0 # train
+STEP_4=1 # train
 STEP_5=0 # val
 STEP_6=0 # viz
-STEP_7=0 # export model
+STEP_7=1 # export model
 
 # Set up the working environment.
 CURRENT_DIR=$(pwd)
@@ -114,7 +114,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=10
+NUM_ITERATIONS=30000
 
 if [ ${STEP_4} -eq 1 ]
 then
@@ -132,7 +132,6 @@ then
     --train_batch_size=4 \
     --training_number_of_steps="${NUM_ITERATIONS}" \
     --fine_tune_batch_norm=true \
-    --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
     --train_logdir="${TRAIN_LOGDIR}" \
     --dataset_dir="${MESSIDOR_DATASET}"
 fi
@@ -201,7 +200,7 @@ then
     --atrous_rates=18 \
     --output_stride=16 \
     --decoder_output_stride=4 \
-    --num_classes=21 \
+    --num_classes=4 \
     --crop_size=513 \
     --crop_size=513 \
     --inference_scales=1.0
