@@ -3,6 +3,7 @@ import shutil
 import argparse
 import glob
 from random import randrange
+from PIL import Image
 import cv2
 import numpy as np
 from skimage import morphology
@@ -49,12 +50,15 @@ if __name__ == '__main__':
     shutil.rmtree(args.fullpath_train_val_list, ignore_errors=True, onerror=None)
     os.makedirs(args.fullpath_train_val_list)
 
+    #Get palette from some image
+    #palette = Image.open('deeplab/datasets/pascal_voc_image_sample_to_get_palette.png').palette
+
     files = [f for f in glob.glob(f'{args.fullpath_origin}/*prime.tif', recursive=True)]
 
     for idx, f in enumerate(files):
-        img_original = cv2.imread(f)
+        img_original = np.array(Image.open(f))
         target_filename = f.replace('prime', '-' + str(randrange(1, 6)))
-        img_target = cv2.imread(target_filename)
+        img_target = np.array(Image.open(target_filename))
 
         # Image Difference
         img_diff = img_target - img_original
@@ -80,27 +84,31 @@ if __name__ == '__main__':
 
         '''
         Stack RGB channels of each label follow this map:
-        Background: (0,0,0)
-        Eye: (128,0,0)
-        Rim: (0,128,0)
-        Cup: (128,128,0)
+        Cup: RGB:(128,128,0) - Label: 0
+        Rim: RGB:(0,128,0) - Label: 1
+        Eye: RGB:(128,0,0) - Label: 2
+        Background: RGB:(0,0,0) - Label: 3
         '''
 
         img_segmentation = np.zeros(img_original.shape) # All is Background so far
         img_segmentation[:,:,0] = (eye_mask | cup_mask) * 128 # Fill first layer with eye and cup mask following above map segmentation.
         img_segmentation[:,:,1] = (rim_mask | cup_mask) * 128 # Fill second layer with rim and cup mask following above map segmentation.
 
-        img_segmentation = img_segmentation.astype(np.uint8)
+        im = Image.fromarray(img_segmentation.astype(np.uint8))
 
-        #img_segmentation = np.stack((eye, rim, cup), axis=2)
-        #img_segmentation = (eye + rim + cup)
+        #img_segmentation = im.convert('RGB').convert('P', palette=palette)
+        img_segmentation = im.convert('RGB').convert('P', palette=Image.ADAPTIVE, colors=256)
 
         ori_filename = target_filename.split('/')[-1].replace('tif', 'jpg')
         seg_filename = target_filename.split('/')[-1].replace('tif', 'png')
 
         if (np.sum(cup_mask) > 0) & (np.sum(rim_mask) > 0):
-            cv2.imwrite(f'{args.fullpath_JPEGDestination}/{ori_filename}', img_original)
-            cv2.imwrite(f'{args.fullpath_destination}/{seg_filename}', img_segmentation)
+            # Save with PIL
+            Image.fromarray(img_original).save(f'{args.fullpath_JPEGDestination}/{ori_filename}')
+            img_segmentation.save(f'{args.fullpath_destination}/{seg_filename}')
+            # Save with cv2
+            #cv2.imwrite(f'{args.fullpath_JPEGDestination}/{ori_filename}', img_original)
+            #cv2.imwrite(f'{args.fullpath_destination}/{seg_filename}', np.array(img_segmentation))
         else:
             print('Error on ' + f)
 
