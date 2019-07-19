@@ -73,16 +73,26 @@ if __name__ == '__main__':
 
         cup_mask = morphology.remove_small_holes(img_mask, np.sum(disk_mask) * 0.45)
         cup_mask = morphology.remove_small_objects(cup_mask, np.sum(disk_mask) * 0.1)
-        cup = cup_mask * 50
 
         rim_mask = disk_mask ^ cup_mask #Disk less Cup using XOR operator
-        rim = rim_mask * 100
 
         eye_mask = np.invert(bg_mask) ^ disk_mask #Eye less Disk using XOR operator
-        eye = eye_mask * 150
+
+        '''
+        Stack RGB channels of each label follow this map:
+        Background: (0,0,0)
+        Eye: (128,0,0)
+        Rim: (0,128,0)
+        Cup: (128,128,0)
+        '''
+        
+        img_segmentation = np.zeros(img_original.shape) # All is Background so far
+        img_segmentation[:,:,0] = eye_mask * 128 # Fill image with eye segmentation RGB=(128,0,0)
+        img_segmentation[:,:,1] = rim_mask * 128 # Fill image with rim segmentation RGB=(0,128,0)
+        img_segmentation[:,:,0:1] = cup_mask * 128 # Fill image with cup segmentation RGB=(128,128,0)
 
         #img_segmentation = np.stack((eye, rim, cup), axis=2)
-        img_segmentation = (eye + rim + cup)
+        #img_segmentation = (eye + rim + cup)
 
         ori_filename = target_filename.split('/')[-1].replace('tif', 'jpg')
         seg_filename = target_filename.split('/')[-1].replace('tif', 'png')
