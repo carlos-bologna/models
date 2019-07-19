@@ -89,7 +89,8 @@ if __name__ == '__main__':
         img_segmentation = np.zeros(img_original.shape) # All is Background so far
         img_segmentation[:,:,0] = eye_mask * 128 # Fill image with eye segmentation RGB=(128,0,0)
         img_segmentation[:,:,1] = rim_mask * 128 # Fill image with rim segmentation RGB=(0,128,0)
-        img_segmentation[:,:,0:1] = cup_mask * 128 # Fill image with cup segmentation RGB=(128,128,0)
+        img_segmentation[:,:,0] = cup_mask * 128 # Fill image with cup segmentation RGB=(128,128,0)
+        img_segmentation[:,:,1] = cup_mask * 128 # Fill image with cup segmentation RGB=(128,128,0)
 
         #img_segmentation = np.stack((eye, rim, cup), axis=2)
         #img_segmentation = (eye + rim + cup)
