@@ -40,13 +40,13 @@ def save_train_val_list(files_list):
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    shutil.rmtree(args.fullpath_destination, ignore_errors=False, onerror=None)
+    shutil.rmtree(args.fullpath_destination, ignore_errors=True, onerror=None)
     os.makedirs(args.fullpath_destination)
 
-    shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=False, onerror=None)
+    shutil.rmtree(args.fullpath_JPEGDestination, ignore_errors=True, onerror=None)
     os.makedirs(args.fullpath_JPEGDestination)
 
-    shutil.rmtree(args.fullpath_train_val_list, ignore_errors=False, onerror=None)
+    shutil.rmtree(args.fullpath_train_val_list, ignore_errors=True, onerror=None)
     os.makedirs(args.fullpath_train_val_list)
 
     files = [f for f in glob.glob(f'{args.fullpath_origin}/*prime.tif', recursive=True)]
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         Rim: (0,128,0)
         Cup: (128,128,0)
         '''
-        
+
         img_segmentation = np.zeros(img_original.shape) # All is Background so far
         img_segmentation[:,:,0] = eye_mask * 128 # Fill image with eye segmentation RGB=(128,0,0)
         img_segmentation[:,:,1] = rim_mask * 128 # Fill image with rim segmentation RGB=(0,128,0)
