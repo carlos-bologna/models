@@ -33,13 +33,13 @@ cd ..
 export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
-STEP_1=1 #preprocess
-STEP_2=0 #convert images with build_voc2012_data
-STEP_3=0 # download pre-treined model from internet
-STEP_4=0 # train
+STEP_1=0 #preprocess
+STEP_2=1 #convert images with build_voc2012_data
+STEP_3=0 # download pre-treined model from internet (always 0 for train from scratch)
+STEP_4=1 # train
 STEP_5=0 # val
 STEP_6=0 # viz
-STEP_7=0 # export model
+STEP_7=1 # export model
 
 # Set up the working environment.
 CURRENT_DIR=$(pwd)
