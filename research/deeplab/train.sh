@@ -34,7 +34,7 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
 STEP_1=0 #preprocess
-STEP_2=1 #convert images with build_voc2012_data
+STEP_2=0 #convert images with build_voc2012_data
 STEP_3=0 # download pre-treined model from internet (always 0 for train from scratch)
 STEP_4=1 # train
 STEP_5=0 # val
@@ -114,7 +114,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=30000
+NUM_ITERATIONS=500
 
 if [ ${STEP_4} -eq 1 ]
 then
@@ -129,11 +129,12 @@ then
     --output_stride=16 \
     --decoder_output_stride=4 \
     --train_crop_size="513,513" \
-    --train_batch_size=4 \
+    --train_batch_size=2 \
     --training_number_of_steps="${NUM_ITERATIONS}" \
     --fine_tune_batch_norm=true \
     --train_logdir="${TRAIN_LOGDIR}" \
-    --dataset_dir="${MESSIDOR_DATASET}"
+    --dataset_dir="${MESSIDOR_DATASET}" \
+    --save_summaries_images=true
 fi
 
 # Run evaluation. This performs eval over the full val split  and
