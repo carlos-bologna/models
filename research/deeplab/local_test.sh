@@ -103,6 +103,7 @@ NUM_ITERATIONS=5000
     --train_batch_size=2 \
     --training_number_of_steps="${NUM_ITERATIONS}" \
     --fine_tune_batch_norm=true \
+    --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_xception_2018_01_04/xception/model.ckpt" \
     --train_logdir="${TRAIN_LOGDIR}" \
     --dataset_dir="${PASCAL_DATASET}"
 

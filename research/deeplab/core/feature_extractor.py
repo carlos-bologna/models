@@ -178,8 +178,8 @@ name_scope = {
 }
 
 # Mean pixel value.
-_MEAN_RGB = [123.15, 115.90, 103.06]
-
+#_MEAN_RGB = [123.15, 115.90, 103.06]
+_MEAN_RGB = [104.54, 107.17, 111.68]
 
 def _preprocess_subtract_imagenet_mean(inputs, dtype=tf.float32):
   """Subtract Imagenet mean RGB value."""
