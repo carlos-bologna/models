@@ -72,23 +72,40 @@ cd "${CURRENT_DIR}"
 PASCAL_DATASET="${WORK_DIR}/${DATASET_DIR}/${PASCAL_FOLDER}/tfrecord"
 
 # Train 10 iterations.
-NUM_ITERATIONS=10
-python "${WORK_DIR}"/train.py \
-  --logtostderr \
-  --train_split="trainval" \
-  --model_variant="xception_65" \
-  --atrous_rates=6 \
-  --atrous_rates=12 \
-  --atrous_rates=18 \
-  --output_stride=16 \
-  --decoder_output_stride=4 \
-  --train_crop_size="513,513" \
-  --train_batch_size=4 \
-  --training_number_of_steps="${NUM_ITERATIONS}" \
-  --fine_tune_batch_norm=true \
-  --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
-  --train_logdir="${TRAIN_LOGDIR}" \
-  --dataset_dir="${PASCAL_DATASET}"
+NUM_ITERATIONS=5000
+#python "${WORK_DIR}"/train.py \
+#  --logtostderr \
+#  --train_split="trainval" \
+#  --model_variant="xception_65" \
+#  --atrous_rates=6 \
+#  --atrous_rates=12 \
+#  --atrous_rates=18 \
+#  --output_stride=16 \
+#  --decoder_output_stride=4 \
+#  --train_crop_size="513,513" \
+#  --train_batch_size=2 \
+#  --training_number_of_steps="${NUM_ITERATIONS}" \
+#  --fine_tune_batch_norm=true \
+#  --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_pascal_train_aug/model.ckpt" \
+#  --train_logdir="${TRAIN_LOGDIR}" \
+#  --dataset_dir="${PASCAL_DATASET}"
+
+  python "${WORK_DIR}"/train.py \
+    --logtostderr \
+    --train_split="trainval" \
+    --model_variant="xception_65" \
+    --atrous_rates=6 \
+    --atrous_rates=12 \
+    --atrous_rates=18 \
+    --output_stride=16 \
+    --decoder_output_stride=4 \
+    --train_crop_size="513,513" \
+    --train_batch_size=2 \
+    --training_number_of_steps="${NUM_ITERATIONS}" \
+    --fine_tune_batch_norm=true \
+    --train_logdir="${TRAIN_LOGDIR}" \
+    --dataset_dir="${PASCAL_DATASET}"
+
 
 # Run evaluation. This performs eval over the full val split (1449 images) and
 # will take a while.

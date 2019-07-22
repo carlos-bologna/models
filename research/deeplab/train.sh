@@ -34,7 +34,7 @@ export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Steps to run:
 STEP_1=0 #preprocess
-STEP_2=0 #convert images with build_voc2012_data
+STEP_2=1 #convert images with build_voc2012_data
 STEP_3=0 # download pre-treined model from internet (always 0 for train from scratch)
 STEP_4=1 # train
 STEP_5=0 # val
@@ -114,7 +114,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=100
+NUM_ITERATIONS=30000
 
 if [ ${STEP_4} -eq 1 ]
 then
