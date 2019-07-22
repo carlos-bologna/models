@@ -114,7 +114,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=500
+NUM_ITERATIONS=100
 
 if [ ${STEP_4} -eq 1 ]
 then
@@ -122,7 +122,7 @@ then
     --logtostderr \
     --train_split="train" \
     --dataset="messidor" \
-    --model_variant="xception_65" \
+    --model_variant="resnet_v1_50" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -133,8 +133,7 @@ then
     --training_number_of_steps="${NUM_ITERATIONS}" \
     --fine_tune_batch_norm=true \
     --train_logdir="${TRAIN_LOGDIR}" \
-    --dataset_dir="${MESSIDOR_DATASET}" \
-    --save_summaries_images=true
+    --dataset_dir="${MESSIDOR_DATASET}"
 fi
 
 # Run evaluation. This performs eval over the full val split  and
@@ -148,7 +147,7 @@ then
     --logtostderr \
     --eval_split="val" \
     --dataset="messidor" \
-    --model_variant="xception_65" \
+    --model_variant="resnet_v1_50" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -158,7 +157,8 @@ then
     --checkpoint_dir="${TRAIN_LOGDIR}" \
     --eval_logdir="${EVAL_LOGDIR}" \
     --dataset_dir="${MESSIDOR_DATASET}" \
-    --max_number_of_evaluations=1
+    --max_number_of_evaluations=1 \
+    --eval_interval_secs=600
 fi
 
 ## Visualize the results.
@@ -170,7 +170,7 @@ then
     --logtostderr \
     --vis_split="val" \
     --dataset="messidor" \
-    --model_variant="xception_65" \
+    --model_variant="resnet_v1_50" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -179,7 +179,7 @@ then
     --vis_crop_size="513,513" \
     --checkpoint_dir="${TRAIN_LOGDIR}" \
     --vis_logdir="${VIS_LOGDIR}" \
-    --dataset_dir="${PASCAL_DATASET}" \
+    --dataset_dir="${MESSIDOR_DATASET}" \
     --max_number_of_iterations=1
 
 fi
@@ -195,7 +195,7 @@ then
     --logtostderr \
     --checkpoint_path="${CKPT_PATH}" \
     --export_path="${EXPORT_PATH}" \
-    --model_variant="xception_65" \
+    --model_variant="resnet_v1_50" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
