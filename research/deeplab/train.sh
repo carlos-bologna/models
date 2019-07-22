@@ -49,6 +49,7 @@ WORK_DIR="${CURRENT_DIR}/deeplab"
 DATASET_DIR="datasets"
 MESSIDOR_FOLDER="MESSIDOR"
 MESSIDOR_EXT="MESSIDOR_EXT"
+MODEL_VARIANT="xception_65"
 
 if [ ${STEP_1} -eq 1 ]
 then
@@ -122,7 +123,7 @@ then
     --logtostderr \
     --train_split="train" \
     --dataset="messidor" \
-    --model_variant="resnet_v1_50" \
+    --model_variant="${MODEL_VARIANT}" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -147,7 +148,7 @@ then
     --logtostderr \
     --eval_split="val" \
     --dataset="messidor" \
-    --model_variant="resnet_v1_50" \
+    --model_variant="${MODEL_VARIANT}" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -170,7 +171,7 @@ then
     --logtostderr \
     --vis_split="val" \
     --dataset="messidor" \
-    --model_variant="resnet_v1_50" \
+    --model_variant="${MODEL_VARIANT}" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \
@@ -195,7 +196,7 @@ then
     --logtostderr \
     --checkpoint_path="${CKPT_PATH}" \
     --export_path="${EXPORT_PATH}" \
-    --model_variant="resnet_v1_50" \
+    --model_variant="${MODEL_VARIANT}" \
     --atrous_rates=6 \
     --atrous_rates=12 \
     --atrous_rates=18 \

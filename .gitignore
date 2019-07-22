@@ -9,6 +9,7 @@ research/deeplab/datasets/init_models/
 research/deeplab/datasets/tfrecord/
 # research/deeplab/datasets/SegmentationClass/
 # research/deeplab/datasets/Splits/
+research/deeplab/datasets/pascal_voc_seg/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
