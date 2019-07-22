@@ -50,7 +50,9 @@ DATASET_DIR="datasets"
 MESSIDOR_FOLDER="MESSIDOR"
 MESSIDOR_EXT="MESSIDOR_EXT"
 #MODEL_VARIANT="xception_65"
+#BACKBONE_MODEL="deeplabv3_xception_2018_01_04/xception"
 MODEL_VARIANT="resnet_v1_50"
+BACKBONE_MODEL="resnet_v1_50_2018_05_04/resnet_v1_50"
 
 if [ ${STEP_1} -eq 1 ]
 then
@@ -116,7 +118,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=5000
+NUM_ITERATIONS=30000
 
 if [ ${STEP_4} -eq 1 ]
 then
@@ -135,7 +137,7 @@ then
     --training_number_of_steps="${NUM_ITERATIONS}" \
     --fine_tune_batch_norm=false \
     --base_learning_rate=0.00001 \
-    --tf_initial_checkpoint="${INIT_FOLDER}/deeplabv3_xception_2018_01_04/xception/model.ckpt" \
+    --tf_initial_checkpoint="${INIT_FOLDER}/${BACKBONE_MODEL}/model.ckpt" \
     --train_logdir="${TRAIN_LOGDIR}" \
     --dataset_dir="${MESSIDOR_DATASET}"
 fi
