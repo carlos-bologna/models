@@ -49,10 +49,13 @@ WORK_DIR="${CURRENT_DIR}/deeplab"
 DATASET_DIR="datasets"
 MESSIDOR_FOLDER="MESSIDOR"
 MESSIDOR_EXT="MESSIDOR_EXT"
-#MODEL_VARIANT="xception_65"
-#BACKBONE_MODEL="deeplabv3_xception_2018_01_04/xception"
-MODEL_VARIANT="resnet_v1_50"
-BACKBONE_MODEL="resnet_v1_50_2018_05_04/resnet_v1_50"
+MODEL_VARIANT="xception_65"
+BACKBONE_MODEL="deeplabv3_xception_2018_01_04/xception"
+#MODEL_VARIANT="resnet_v1_50"
+#BACKBONE_MODEL="resnet_v1_50_2018_05_04/resnet_v1_50"
+#MODEL_VARIANT="resnet_v1_101"
+#BACKBONE_MODEL="resnet_v1_101_2018_05_04/resnet_v1_101"
+
 
 if [ ${STEP_1} -eq 1 ]
 then
