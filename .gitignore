@@ -10,6 +10,7 @@ research/deeplab/datasets/tfrecord/
 # research/deeplab/datasets/SegmentationClass/
 # research/deeplab/datasets/Splits/
 research/deeplab/datasets/pascal_voc_seg/
+research/deeplab/datasets/MESSIDOR_EXT_xception65_iter30000_batch2_zeromean_normFalse_lr0.00001_totloss0.382.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

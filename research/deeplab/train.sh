@@ -121,7 +121,7 @@ fi
 cd "${CURRENT_DIR}"
 
 # Train 10 iterations.
-NUM_ITERATIONS=30000
+NUM_ITERATIONS=10000
 
 if [ ${STEP_4} -eq 1 ]
 then
@@ -138,8 +138,8 @@ then
     --train_crop_size="513,513" \
     --train_batch_size=2 \
     --training_number_of_steps="${NUM_ITERATIONS}" \
-    --fine_tune_batch_norm=false \
-    --base_learning_rate=0.00001 \
+    --fine_tune_batch_norm=true \
+    --base_learning_rate=0.0001 \
     --tf_initial_checkpoint="${INIT_FOLDER}/${BACKBONE_MODEL}/model.ckpt" \
     --train_logdir="${TRAIN_LOGDIR}" \
     --dataset_dir="${MESSIDOR_DATASET}"

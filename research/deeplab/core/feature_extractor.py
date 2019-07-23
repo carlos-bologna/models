@@ -210,7 +210,6 @@ _PREPROCESS_FN = {
     'nas_hnasnet': _preprocess_zero_mean_unit_range,
 }
 
-
 def mean_pixel(model_variant=None):
   """Gets mean pixel value.
 
