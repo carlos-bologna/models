@@ -17,7 +17,7 @@
 import tensorflow as tf
 from deeplab.core import feature_extractor
 from deeplab.core import preprocess_utils
-
+from skimage import exposure
 
 # The probability of flipping the images and labels
 # left-right during training
@@ -77,6 +77,7 @@ def preprocess_image_and_label(image,
   original_image = image
 
   processed_image = tf.cast(image, tf.float32)
+
 
   if label is not None:
     label = tf.cast(label, tf.int32)

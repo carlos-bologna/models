@@ -103,7 +103,7 @@ _MESSIDOR = DatasetDescriptor(
         'trainval': 456,
     },
     num_classes=4,
-    ignore_label=255,
+    ignore_label=2, # ignore eye label
 )
 
 _DATASETS_INFORMATION = {
